@@ -88,8 +88,8 @@ namespace gomoku {
             perror("sigaction");
             exit(1);
         }
-        char* buffer = new char[BUFFER_SIZE];
-
+//        char* buffer = new char[BUFFER_SIZE];
+        char buffer[BUFFER_SIZE];
         // main accept() loop
         while(true) {
             //create client socket
@@ -99,6 +99,7 @@ namespace gomoku {
                                                    &sin_size));
 
             //read response from client
+            memset(buffer, 0, sizeof buffer /sizeof (char));
             client_socket.readResponse(buffer, BUFFER_SIZE);
 
             INFO("request from  ({} bytes):\n{}",  client_socket.read_bytes_quantity, buffer);
